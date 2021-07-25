@@ -264,7 +264,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discription" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHa-iD-GIY">
-                                <rect key="frame" x="20" y="357" width="374" height="24"/>
+                                <rect key="frame" x="20" y="363" width="374" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -294,19 +294,28 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJj-aK-Zt4">
+                                <rect key="frame" x="20" y="327" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="29B-eR-KVd" firstAttribute="top" secondItem="iIH-9k-j3m" secondAttribute="top" constant="10" id="7aL-3G-XB1"/>
+                            <constraint firstItem="nJj-aK-Zt4" firstAttribute="top" secondItem="29B-eR-KVd" secondAttribute="bottom" constant="20" id="BHy-mc-FGM"/>
                             <constraint firstItem="iIH-9k-j3m" firstAttribute="trailing" secondItem="c48-GB-LQz" secondAttribute="trailing" constant="50" id="HLV-fi-gCj"/>
                             <constraint firstItem="Ugh-Yi-Kk2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="yHa-iD-GIY" secondAttribute="bottom" constant="20" id="J33-cj-szT"/>
-                            <constraint firstItem="yHa-iD-GIY" firstAttribute="top" secondItem="29B-eR-KVd" secondAttribute="bottom" constant="50" id="Mkt-tr-KxQ"/>
                             <constraint firstItem="29B-eR-KVd" firstAttribute="leading" secondItem="iIH-9k-j3m" secondAttribute="leading" constant="5" id="Um0-13-wCZ"/>
                             <constraint firstItem="iIH-9k-j3m" firstAttribute="trailing" secondItem="yHa-iD-GIY" secondAttribute="trailing" constant="20" id="WxW-on-sdF"/>
                             <constraint firstItem="yHa-iD-GIY" firstAttribute="leading" secondItem="iIH-9k-j3m" secondAttribute="leading" constant="20" id="YcV-a0-5Nd"/>
                             <constraint firstItem="Ugh-Yi-Kk2" firstAttribute="leading" secondItem="iIH-9k-j3m" secondAttribute="leading" constant="20" id="dYx-hU-Uzc"/>
+                            <constraint firstItem="nJj-aK-Zt4" firstAttribute="leading" secondItem="iIH-9k-j3m" secondAttribute="leading" constant="20" id="eTY-6i-Xxn"/>
                             <constraint firstItem="iIH-9k-j3m" firstAttribute="bottom" secondItem="c48-GB-LQz" secondAttribute="bottom" constant="20" id="g6F-pU-RmN"/>
+                            <constraint firstItem="iIH-9k-j3m" firstAttribute="trailing" secondItem="nJj-aK-Zt4" secondAttribute="trailing" constant="20" id="iRT-35-lL4"/>
                             <constraint firstItem="c48-GB-LQz" firstAttribute="top" secondItem="Ugh-Yi-Kk2" secondAttribute="bottom" constant="23" id="sX5-kU-BLb"/>
+                            <constraint firstItem="yHa-iD-GIY" firstAttribute="top" secondItem="nJj-aK-Zt4" secondAttribute="bottom" constant="15" id="viw-ox-SUI"/>
                             <constraint firstItem="iIH-9k-j3m" firstAttribute="trailing" secondItem="Ugh-Yi-Kk2" secondAttribute="trailing" constant="20" id="x94-BD-Iy2"/>
                             <constraint firstAttribute="trailing" secondItem="29B-eR-KVd" secondAttribute="trailing" constant="5" id="xOW-wd-QgF"/>
                             <constraint firstItem="c48-GB-LQz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ugh-Yi-Kk2" secondAttribute="bottom" constant="15" id="xmJ-iY-mOc"/>
@@ -316,6 +325,7 @@
                     <connections>
                         <outlet property="articleImageView" destination="29B-eR-KVd" id="Lch-9V-XoI"/>
                         <outlet property="discriptionLabel" destination="yHa-iD-GIY" id="cpC-wp-qig"/>
+                        <outlet property="labelDate" destination="nJj-aK-Zt4" id="nDp-e6-0Pn"/>
                         <outlet property="textViewLink" destination="Ugh-Yi-Kk2" id="xfD-ZH-8Fv"/>
                     </connections>
                 </viewController>

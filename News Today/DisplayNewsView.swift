@@ -11,6 +11,7 @@ import UIKit
 class DisplayNewsView: UIViewController {
     @IBOutlet weak var articleImageView: UIImageView!
     
+    @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var discriptionLabel: UILabel!
     var displayNewsViewModel: DisplayNewsViewModel?
     
@@ -19,6 +20,7 @@ class DisplayNewsView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.labelDate.text = self.displayNewsViewModel?.getDateInfo()
         self.discriptionLabel.text  = self.displayNewsViewModel?.getDiscription()
         let attributedString = NSMutableAttributedString(string: "For more details Click Here")
         let urlLink = URL(string: self.displayNewsViewModel?.getUrl() ?? "")
