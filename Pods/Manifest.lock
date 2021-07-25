@@ -1,0 +1,41 @@
+PODS:
+  - Alamofire (5.4.3)
+  - AlamofireImage (4.2.0):
+    - Alamofire (~> 5.4)
+  - DropDown (2.3.13)
+  - Markup (2.2)
+  - NVActivityIndicatorView/Base (5.1.1)
+  - NVActivityIndicatorView/Extended (5.1.1):
+    - NVActivityIndicatorView/Base
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.2)
+  - AlamofireImage (~> 4.1)
+  - DropDown
+  - Markup
+  - NVActivityIndicatorView/Extended
+  - SDWebImage (~> 5.0)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AlamofireImage
+    - DropDown
+    - Markup
+    - NVActivityIndicatorView
+    - SDWebImage
+
+SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  Markup: 8c29257bd52d0e7ef047e83939102f097b4f8570
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+
+PODFILE CHECKSUM: e4b8d63de53a8c3f252d35d9e004a45486397739
+
+COCOAPODS: 1.8.4
