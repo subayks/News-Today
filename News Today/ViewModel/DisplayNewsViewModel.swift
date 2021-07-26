@@ -28,6 +28,6 @@ class DisplayNewsViewModel {
     
     func getDateInfo() ->String {
         return self.articleInfo?.publishedAt ?? ""
-
+        
     }
 }

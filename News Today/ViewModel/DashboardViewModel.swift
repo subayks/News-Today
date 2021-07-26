@@ -10,6 +10,11 @@ struct CountryModel {
     var countryCode: String?
 }
 
+struct LanguageModel {
+    var languageName: String?
+    var languageCode: String?
+}
+
 class DashboardViewModel {
     var apiService: articleAPIServiceProtocol
     var selectedCountry: String?
@@ -20,6 +25,7 @@ class DashboardViewModel {
     var loadingClosure:(()->())?
     var showAlert:(() -> ())?
     var navigationClosure:(() ->())?
+    var sourceModel: SourceModel?
     
     var isLoading: Bool = false {
         didSet {
@@ -60,6 +66,32 @@ class DashboardViewModel {
         }
     }
     
+    func makeSourceApiCall() {
+        let finalURL = self.getFinalUrl()
+        
+        if Reachability.isConnectedToNetwork() {
+            self.isLoading = true
+            
+            apiService.getSourceResponse(finalURL: finalURL, completion: { (status: Bool? , errorCode: String?,result: AnyObject?, errorMessage: String?) -> Void in
+                DispatchQueue.main.async {
+                    if status == true {
+                        self.sourceModel = result as? SourceModel
+                        self.isLoading = false
+                        if self.sourceModel?.status == "error" {
+                            self.showAlert?()
+                            return
+                        }
+                        self.navigationClosure?()
+                        
+                    } else {
+                        self.showAlert?()
+                        
+                    }
+                }
+            })
+        }
+    }
+    
     func setUpCountryDetails() {
         for i in 0..<countryCode.count {
             var countryModel = CountryModel()
@@ -72,9 +104,9 @@ class DashboardViewModel {
     
     func getFinalUrl() ->String {
         if sourceClicked {
-            return "https://newsapi.org/v2/top-headlines/sources?apiKey=b5177be3e6ad4286b6dbc3d83421efd7"
+            return "https://newsapi.org/v2/top-headlines/sources?apiKey=442339c823ba48be912e963c1271707b"
         } else {
-            return "https://newsapi.org/v2/top-headlines?country=\(self.selectedCountry ?? "")&category=\( (self.selectedCategory == "Select Category" ? "": self.selectedCategory) ?? "")&apiKey=b5177be3e6ad4286b6dbc3d83421efd7"
+            return "https://newsapi.org/v2/top-headlines?country=\(self.selectedCountry ?? "")&category=\( (self.selectedCategory == "Select Category" ? "": self.selectedCategory) ?? "")&apiKey=442339c823ba48be912e963c1271707b"
         }
     }
     
@@ -98,9 +130,9 @@ class DashboardViewModel {
     }
     
     func viewModelForSourceViewController() ->SourceViewModel? {
-        if let articleModel = self.articlesModel {
-            return SourceViewModel.init(articlesModel: articleModel)
+        if let articleModel = self.sourceModel {
+            return SourceViewModel.init(sourceModel: articleModel)
         }
-        return SourceViewModel.init(articlesModel: self.articlesModel!)
+        return SourceViewModel.init(sourceModel: self.sourceModel!)
     }
 }

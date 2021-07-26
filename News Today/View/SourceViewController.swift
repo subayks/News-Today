@@ -20,8 +20,9 @@ class SourceViewController: UIViewController,NVActivityIndicatorViewable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
+        self.sourceViewModel?.setUpCountryList()
+        self.sourceViewModel?.setUplanguageArray()
+        self.sourceViewModel?.setUpCategoryArray()
         
         self.sourceViewModel?.loadingClosure = { [weak self] in
             DispatchQueue.main.async {
@@ -70,17 +71,14 @@ class SourceViewController: UIViewController,NVActivityIndicatorViewable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Set up country name
-        self.sourceViewModel?.setUpCountryList()
-               self.sourceViewModel?.setUplanguageArray()
-               self.sourceViewModel?.setUpCategoryArray()
-        countryDropDown.dataSource = self.sourceViewModel?.countryListArray ?? [String]()
-        self.countryCode.setTitle(self.sourceViewModel?.countryListArray[0] ?? "", for: .normal)
+        countryDropDown.dataSource = self.sourceViewModel?.countryNameArray ?? [String]()
+        self.countryCode.setTitle(self.sourceViewModel?.selectedCountry?.countryName, for: .normal)
         //Set up category button values
         categoryDropDown.dataSource = self.sourceViewModel?.categoryArray ?? [String]()
-        self.categoryType.setTitle(self.sourceViewModel?.categoryArray[0] ?? "", for: .normal)
+        self.categoryType.setTitle(self.sourceViewModel?.selectedCategory, for: .normal)
         //Language Button
-        languageDropDown.dataSource = self.sourceViewModel?.languageArray ?? [String]()
-        self.languageButton.setTitle(self.sourceViewModel?.languageArray[0] ?? "", for: .normal)
+        languageDropDown.dataSource = self.sourceViewModel?.languageNameList ?? [String]()
+        self.languageButton.setTitle(self.sourceViewModel?.selectedLanguage?.languageName, for: .normal)
         //Set border radius curve
         self.countryCode.layer.borderWidth = 1
         self.categoryType.layer.borderWidth = 1
@@ -145,17 +143,16 @@ extension SourceViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = sourceTableView.dequeueReusableCell(withIdentifier: "SourceListTableViewCell") as! SourceListTableViewCell
         cell.textLabel?.textColor = .white
-        if self.sourceViewModel?.articlesModel?.sources?.count == 0 {
+        if self.sourceViewModel?.sourceModel?.sources?.count == 0 {
             cell.textLabel?.text = "No result found"
         } else {
-        cell.textLabel?.text = sourceViewModel?.getSourceList(index: indexPath.row)
+            cell.textLabel?.text = sourceViewModel?.getSourceList(index: indexPath.row)
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sourceViewModel?.updateSourceValue(index: indexPath.row)
-        self.sourceViewModel?.channelSelected = true
         self.sourceViewModel?.makeApiCall()
     }
     

@@ -82,7 +82,7 @@ struct Source : Codable {
     let category: String?
     let language : String?
     let country: String?
-        
+    
     enum CodingKeys: String, CodingKey {
         
         case id = "id"

@@ -60,16 +60,16 @@ class ViewController: UIViewController, UIAlertViewDelegate,NVActivityIndicatorV
                 guard let self = self else {return}
                 if self.dashboardViewModel.sourceClicked {
                     guard let vc = self.storyboard?.instantiateViewController(identifier: "SourceViewController") as? SourceViewController else {
-                                       return
-                                   }
-                                   vc.sourceViewModel = self.dashboardViewModel.viewModelForSourceViewController()
-                                   self.navigationController?.pushViewController(vc, animated: true)
+                        return
+                    }
+                    vc.sourceViewModel = self.dashboardViewModel.viewModelForSourceViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
                 } else {
-                guard let vc = self.storyboard?.instantiateViewController(identifier: "ArticlesListViewController") as? ArticlesListViewController else {
-                    return
-                }
-                vc.articlesListViewModel = self.dashboardViewModel.viewModelForArtilceList()
-                self.navigationController?.pushViewController(vc, animated: true)
+                    guard let vc = self.storyboard?.instantiateViewController(identifier: "ArticlesListViewController") as? ArticlesListViewController else {
+                        return
+                    }
+                    vc.articlesListViewModel = self.dashboardViewModel.viewModelForArtilceList()
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
                 
                 
@@ -133,7 +133,7 @@ class ViewController: UIViewController, UIAlertViewDelegate,NVActivityIndicatorV
     
     @IBAction func actionSource(_ sender: Any) {
         self.dashboardViewModel.sourceClicked = true
-        self.dashboardViewModel.makeApiCall()
+        self.dashboardViewModel.makeSourceApiCall()
     }
     
     

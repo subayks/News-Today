@@ -142,20 +142,20 @@
 		093F0F6626AD19A400A67BDE /* News Today */ = {
 			isa = PBXGroup;
 			children = (
+				0962A2AC26AD54AA00A09E68 /* Networks */,
 				0962A2CD26ADE33C00A09E68 /* Model */,
 				0962A2CC26ADE33000A09E68 /* Cell */,
 				0962A2CB26ADE32800A09E68 /* ViewModel */,
 				0962A2C926ADE31800A09E68 /* View */,
 				093F0F6726AD19A400A67BDE /* AppDelegate.swift */,
+				0962A2CE26ADE3F000A09E68 /* ApiServices.swift */,
 				093F0F6926AD19A400A67BDE /* SceneDelegate.swift */,
 				093F0F6D26AD19A400A67BDE /* Main.storyboard */,
 				093F0F7326AD19A600A67BDE /* Assets.xcassets */,
 				093F0F7526AD19A600A67BDE /* LaunchScreen.storyboard */,
 				093F0F7826AD19A600A67BDE /* Info.plist */,
 				093F0F7026AD19A400A67BDE /* News_Today.xcdatamodeld */,
-				0962A2AC26AD54AA00A09E68 /* Networks */,
 				0962A2C726ADC7AA00A09E68 /* magazine.png */,
-				0962A2CE26ADE3F000A09E68 /* ApiServices.swift */,
 			);
 			path = "News Today";
 			sourceTree = "<group>";

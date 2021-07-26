@@ -21,7 +21,8 @@ class ArticlesListViewController: UIViewController,NVActivityIndicatorViewable,U
         self.tableViewArticleList.delegate = self
         self.tableViewArticleList.dataSource = self
         searchBarTextField.delegate = self
-        searchBarTextField.placeholder = "Please enter something"
+        searchBarTextField.placeholder = "Search news here"
+        searchBarTextField.autocorrectionType = .no
         
         self.articlesListViewModel?.loadingClosure = { [weak self] in
             DispatchQueue.main.async {
@@ -56,16 +57,6 @@ class ArticlesListViewController: UIViewController,NVActivityIndicatorViewable,U
         }
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     @IBAction func actionLoadMore(_ sender: Any) {
         self.articlesListViewModel?.pageNo += 1
         self.articlesListViewModel?.makeApiCall()

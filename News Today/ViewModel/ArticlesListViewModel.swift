@@ -21,10 +21,10 @@ class ArticlesListViewModel {
     var showAlert:((_ errorMessage: String?,_ errorTitle: String?) -> ())?
     var navigationClosure:(() ->())?
     var isLoading: Bool = false {
-           didSet {
-               self.loadingClosure?()
-           }
-       }
+        didSet {
+            self.loadingClosure?()
+        }
+    }
     
     init(articlesModel: ArticlesModel,selectedCountry: String,selectedCategory: String,sourceValue: String,apiService:articleAPIServiceProtocol = ApiServices()) {
         self.articlesModel = articlesModel
@@ -85,7 +85,6 @@ class ArticlesListViewModel {
     }
     
     func getFinalUrl() ->String {
-        
-        return "https://newsapi.org/v2/top-headlines?country=\(self.selectedCountry ?? "")&category=\( (self.selectedCategory == "Select Category" ? "": self.selectedCategory) ?? "")&page=\(String(self.pageNo))&q=\(self.searchText)&sources=\(self.sourceValue ?? "")&apiKey=b5177be3e6ad4286b6dbc3d83421efd7"
+        return "https://newsapi.org/v2/top-headlines?country=\(self.selectedCountry ?? "")&category=\( (self.selectedCategory == "Select Category" ? "": self.selectedCategory) ?? "")&page=\(String(self.pageNo))&q=\(self.searchText)&sources=\(self.sourceValue ?? "")&apiKey=442339c823ba48be912e963c1271707b"
     }
 }
