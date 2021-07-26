@@ -52,6 +52,7 @@ class ArticlesListViewModel {
         return DisplayNewsViewModel.init(articleInfo: (self.articlesModel?.articles?[index])!)
     }
     
+    //MARK:- Api call for Article list
     func makeApiCall() {
         let finalURL = self.getFinalUrl()
         

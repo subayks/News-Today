@@ -18,6 +18,7 @@ class SourceViewController: UIViewController,NVActivityIndicatorViewable {
     var categoryDropDown = DropDown()
     var languageDropDown = DropDown()
     
+    // MARK:- View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sourceViewModel?.setUpCountryList()
@@ -91,6 +92,8 @@ class SourceViewController: UIViewController,NVActivityIndicatorViewable {
         self.languageButton.layer.borderColor = UIColor.gray.cgColor
     }
     
+    // MARK:- Action for  buttons
+    
     @IBAction func languageSelected(_ sender: UIButton) {
         languageDropDown.anchorView = sender
         languageDropDown.bottomOffset = CGPoint(x: 0, y: sender.frame.size.height)
@@ -133,7 +136,7 @@ class SourceViewController: UIViewController,NVActivityIndicatorViewable {
         }
     }
 }
-
+// MARK:- Table view delegates
 extension SourceViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.sourceViewModel?.numberOfRows() ?? 0
@@ -154,7 +157,5 @@ extension SourceViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.sourceViewModel?.updateSourceValue(index: indexPath.row)
         self.sourceViewModel?.makeApiCall()
-    }
-    
-    
+    }    
 }

@@ -25,6 +25,8 @@ class ViewController: UIViewController, UIAlertViewDelegate,NVActivityIndicatorV
     var dashboardViewModel = DashboardViewModel()
     var categoryArray = ["Select Category","Business", "Entertainment", "General", "Health", "Science","Technology"]
     
+    
+    // MARK:- App life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -95,6 +97,7 @@ class ViewController: UIViewController, UIAlertViewDelegate,NVActivityIndicatorV
         self.countryName.layer.cornerRadius = 25
         self.categoryType.layer.cornerRadius = 25
         self.sourceType.layer.cornerRadius = 25
+        self.buttonGo.layer.cornerRadius = 10
         self.countryName.layer.borderColor = UIColor.gray.cgColor
         self.categoryType.layer.borderColor = UIColor.gray.cgColor
         self.sourceType.layer.borderColor = UIColor.gray.cgColor

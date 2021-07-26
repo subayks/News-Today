@@ -26,7 +26,6 @@ class DashboardViewModel {
     var showAlert:(() -> ())?
     var navigationClosure:(() ->())?
     var sourceModel: SourceModel?
-    
     var isLoading: Bool = false {
         didSet {
             self.loadingClosure?()
@@ -40,6 +39,7 @@ class DashboardViewModel {
     var countryNameArray = ["Select Country","United Arab Emirates","Argentina","Austria","Australia","Belgium","Bulgaria","Brazil","Canada","Switzerland","China","Colombia","Cuba","Czechia","Germany","Egypt","France","United Kingdom of Great Britain and Northern Ireland","Greece","Hong Kong","Hungary","Indonesia","Ireland","Israel"," India","Italy","Japan","Korea","Lithuania","Latvia","Morocco","Mexico","Malaysia","Nigeria","Netherlands","Norway","New Zealand","Philippines","Poland","Portugal","Romania","Serbia","Russian","Saudi Arabia","Sweden","Singapore","Slovenia","Slovakia","Thailand","Turkey","Taiwan","Ukraine","United States of America","Venezuela","South Africa"]
     var countryCode = ["","ae","ar","at","au","be","bg","br","ca","ch","cn","co","cu","cz","de","eg","fr","gb","gr","hk","hu","id","ie","il","in","it","jp","kr","lt","lv","ma","mx","my","ng","nl","no","nz","ph","pl","pt","ro","rs","ru","sa","se","sg","si","sk","th","tr","tw","ua","us","ve","za"]
     
+    //MARK:- Api call for article list
     func makeApiCall() {
         let finalURL = self.getFinalUrl()
         
@@ -66,6 +66,7 @@ class DashboardViewModel {
         }
     }
     
+    //MARK:- Api call for source list
     func makeSourceApiCall() {
         let finalURL = self.getFinalUrl()
         
@@ -92,6 +93,7 @@ class DashboardViewModel {
         }
     }
     
+    //MARK:- Setup values
     func setUpCountryDetails() {
         for i in 0..<countryCode.count {
             var countryModel = CountryModel()
@@ -101,7 +103,7 @@ class DashboardViewModel {
         }
     }
     
-    
+    //MARK:- Final url
     func getFinalUrl() ->String {
         if sourceClicked {
             return "https://newsapi.org/v2/top-headlines/sources?apiKey=442339c823ba48be912e963c1271707b"
@@ -110,6 +112,7 @@ class DashboardViewModel {
         }
     }
     
+    //MARK:- Update selected values
     func updateCountryName(countryName: String) {
         for item in countryDetails {
             if item.countryName == countryName {
@@ -122,6 +125,7 @@ class DashboardViewModel {
         self.selectedCategory = category
     }
     
+    //MARK:- view model values
     func viewModelForArtilceList() ->ArticlesListViewModel? {
         if let articlesModel = self.articlesModel {
             return ArticlesListViewModel.init(articlesModel: articlesModel,selectedCountry: self.selectedCountry ?? "",selectedCategory: self.selectedCategory ?? "", sourceValue: "" )

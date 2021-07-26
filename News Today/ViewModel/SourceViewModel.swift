@@ -45,6 +45,7 @@ class SourceViewModel {
         self.sourceModel = sourceModel
     }
     
+    //MARK:- Setup values
     func setUpCountryList() {
         for i in 0..<countryCode.count {
             var countryModel = CountryModel()
@@ -70,6 +71,7 @@ class SourceViewModel {
         self.selectedCategory = categoryArray[0]
     }
     
+    //MARK:- Update Selected values
     func updateSelectedCategory(category: String) {
         self.selectedCategory = category
         makeSourceApiCall()
@@ -92,7 +94,8 @@ class SourceViewModel {
         }
         makeSourceApiCall()
     }
-    
+   
+    //MARK:- Api call for article list
     func makeApiCall() {
         let finalURL = "https://newsapi.org/v2/top-headlines?sources=\(self.sourceValue ?? "")&apiKey=442339c823ba48be912e963c1271707b"
         
@@ -117,6 +120,7 @@ class SourceViewModel {
         }
     }
     
+    //MARK:- Api call for source list
     func makeSourceApiCall() {
         let finalURL = "https://newsapi.org/v2/top-headlines/sources?language=\((self.selectedLanguage?.languageCode == "All" ? "" : self.selectedLanguage?.languageCode) ?? "")&category=\((self.selectedCategory == "All" ? "" : self.selectedCategory)  ?? "")&country=\((self.selectedCountry?.countryCode == "All" ? "" :self.selectedCountry?.countryCode) ?? "")&apiKey=442339c823ba48be912e963c1271707b"
         
@@ -149,6 +153,7 @@ class SourceViewModel {
         
     }
     
+    //Get num of rows
     func numberOfRows() ->Int {
         return (self.sourceModel?.sources?.count ?? 0) == 0 ? 1: (self.sourceModel?.sources?.count ?? 0)
     }
@@ -157,6 +162,7 @@ class SourceViewModel {
         self.sourceValue = self.sourceModel?.sources?[index].id
     }
     
+    //MARK:- view model values
     func viewModelForArtilceList() ->ArticlesListViewModel? {
         if let articlesModel = self.articlesModel {
             return ArticlesListViewModel.init(articlesModel: articlesModel,selectedCountry: "",selectedCategory: "", sourceValue: self.sourceValue ?? "" )

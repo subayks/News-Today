@@ -14,8 +14,8 @@
             filePath = "News Today/ViewModel/SourceViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "makeApiCall()"
             landmarkType = "7">
             <Locations>
@@ -62,8 +62,8 @@
             filePath = "News Today/ViewModel/ArticlesListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "makeApiCall()"
             landmarkType = "7">
             <Locations>
@@ -218,8 +218,8 @@
             filePath = "News Today/ViewModel/SourceViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "makeSourceApiCall()"
             landmarkType = "7">
          </BreakpointContent>

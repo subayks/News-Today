@@ -16,6 +16,7 @@ class ArticlesListViewController: UIViewController,NVActivityIndicatorViewable,U
     
     var articlesListViewModel: ArticlesListViewModel?
     
+    // MARK:- App life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableViewArticleList.delegate = self
@@ -56,13 +57,13 @@ class ArticlesListViewController: UIViewController,NVActivityIndicatorViewable,U
             }
         }
     }
-    
+    //Action for load more
     @IBAction func actionLoadMore(_ sender: Any) {
         self.articlesListViewModel?.pageNo += 1
         self.articlesListViewModel?.makeApiCall()
     }
 }
-
+// MARK:- Table view delegates
 extension ArticlesListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.articlesListViewModel?.numberofRows() ?? 0
