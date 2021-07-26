@@ -29,6 +29,53 @@ class ViewController: UIViewController, UIAlertViewDelegate,NVActivityIndicatorV
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.dashboardViewModel.setUpCountryDetails()
+        
+        self.dashboardViewModel.loadingClosure = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else {return}
+                let isLoading = self.dashboardViewModel.isLoading
+                if isLoading {
+                    let size = CGSize(width: 50, height: 50)
+                    self.startAnimating(size, message: "Loading", messageFont: .none, type: .ballScaleRippleMultiple, color: .white, fadeInAnimation: .none)
+                    
+                } else {
+                    self.stopAnimating()
+                    
+                }
+            }
+        }
+        
+        self.dashboardViewModel.showAlert = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else {return}
+                let alert = UIAlertController(title: self.dashboardViewModel.articlesModel?.code ?? "", message: self.dashboardViewModel.articlesModel?.message ?? "", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+            }
+        }
+        
+        self.dashboardViewModel.navigationClosure = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else {return}
+                if self.dashboardViewModel.sourceClicked {
+                    guard let vc = self.storyboard?.instantiateViewController(identifier: "SourceViewController") as? SourceViewController else {
+                                       return
+                                   }
+                                   vc.sourceViewModel = self.dashboardViewModel.viewModelForSourceViewController()
+                                   self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                guard let vc = self.storyboard?.instantiateViewController(identifier: "ArticlesListViewController") as? ArticlesListViewController else {
+                    return
+                }
+                vc.articlesListViewModel = self.dashboardViewModel.viewModelForArtilceList()
+                self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
+                
+            }
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,10 +96,10 @@ class ViewController: UIViewController, UIAlertViewDelegate,NVActivityIndicatorV
         self.categoryType.layer.cornerRadius = 25
         self.sourceType.layer.cornerRadius = 25
         self.countryName.layer.borderColor = UIColor.gray.cgColor
-               self.categoryType.layer.borderColor = UIColor.gray.cgColor
-               self.sourceType.layer.borderColor = UIColor.gray.cgColor
+        self.categoryType.layer.borderColor = UIColor.gray.cgColor
+        self.sourceType.layer.borderColor = UIColor.gray.cgColor
         
-
+        
     }
     
     @IBAction func actionCountryName(_ sender: UIButton) {
@@ -86,38 +133,14 @@ class ViewController: UIViewController, UIAlertViewDelegate,NVActivityIndicatorV
     
     @IBAction func actionSource(_ sender: Any) {
         self.dashboardViewModel.sourceClicked = true
-        makeApiCall()
+        self.dashboardViewModel.makeApiCall()
     }
     
     
     @IBAction func actionGo(_ sender: Any) {
-        makeApiCall()
+        self.dashboardViewModel.makeApiCall()
     }
     
-    func makeApiCall() {
-        let finalURL = self.dashboardViewModel.getFinalUrl()
-        
-        if Reachability.isConnectedToNetwork() {
-            let size = CGSize(width: 50, height: 50)
-            self.startAnimating(size, message: "Loading", messageFont: .none, type: .ballScaleRippleMultiple, color: .white, fadeInAnimation: .none)
-            dashboardViewModel.getArticleResponse(withBaseURl: finalURL, withParameters: "", completionHandler: { (status: Bool?, errorMessage: String?, errorCode: String?)  -> Void in
-                DispatchQueue.main.async {
-                    if status == true {
-                        self.stopAnimating()
-                        guard let vc = self.storyboard?.instantiateViewController(identifier: "ArticlesListViewController") as? ArticlesListViewController else {
-                            return
-                        }
-                        vc.articlesListViewModel = self.dashboardViewModel.viewModelForArtilceList()
-                        self.navigationController?.pushViewController(vc, animated: true)
-                        
-                    } else {
-                        let alert = UIAlertController(title: self.dashboardViewModel.articlesModel?.code ?? "", message: self.dashboardViewModel.articlesModel?.message ?? "", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-            })
-        }
-    }
+    
 }
 

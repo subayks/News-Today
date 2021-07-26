@@ -23,7 +23,37 @@ class ArticlesListViewController: UIViewController,NVActivityIndicatorViewable,U
         searchBarTextField.delegate = self
         searchBarTextField.placeholder = "Please enter something"
         
-        // Do any additional setup after loading the view.
+        self.articlesListViewModel?.loadingClosure = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else {return}
+                let isLoading = self.articlesListViewModel?.isLoading ?? false
+                if isLoading {
+                    let size = CGSize(width: 50, height: 50)
+                    self.startAnimating(size, message: "Loading", messageFont: .none, type: .ballScaleRippleMultiple, color: .white, fadeInAnimation: .none)
+                    
+                } else {
+                    self.stopAnimating()
+                    
+                }
+            }
+        }
+        
+        self.articlesListViewModel?.showAlert = { [weak self] (errorMessage, errorCode)in
+            DispatchQueue.main.async {
+                guard let self = self else {return}
+                let alert = UIAlertController(title: errorCode , message: errorMessage, preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
+        self.articlesListViewModel?.navigationClosure = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else {return}
+                self.tableViewArticleList.reloadData()
+                
+            }
+        }
     }
     
     
@@ -38,34 +68,8 @@ class ArticlesListViewController: UIViewController,NVActivityIndicatorViewable,U
      */
     @IBAction func actionLoadMore(_ sender: Any) {
         self.articlesListViewModel?.pageNo += 1
-        makeApiCall()
+        self.articlesListViewModel?.makeApiCall()
     }
-    
-    func makeApiCall() {
-        if let articlesListViewModel = self.articlesListViewModel {
-            let finalURL = articlesListViewModel.getFinalUrl()
-            
-            if Reachability.isConnectedToNetwork() {
-                let size = CGSize(width: 50, height: 50)
-                self.startAnimating(size, message: "Loading", messageFont: .none, type: .ballScaleRippleMultiple, color: .white, fadeInAnimation: .none)
-                articlesListViewModel.getArticleResponse(withBaseURl: finalURL, withParameters: "", completionHandler: { (status: Bool?, errorMessage: String?, errorCode: String?)  -> Void in
-                    DispatchQueue.main.async {
-                        if status == true {
-                            self.stopAnimating()
-                            
-                            self.tableViewArticleList.reloadData()
-                            
-                        } else {
-                            let alert = UIAlertController(title: errorCode , message: errorMessage, preferredStyle: UIAlertController.Style.alert)
-                            alert.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                    }
-                })
-            }
-        }
-    }
-    
 }
 
 extension ArticlesListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -137,7 +141,7 @@ extension ArticlesListViewController {
             let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange,with: string)
             self.articlesListViewModel?.searchText = updatedText
-            makeApiCall()
+            self.articlesListViewModel?.makeApiCall()
         }
         return true
     }
